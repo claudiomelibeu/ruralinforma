@@ -1,17 +1,42 @@
 // Aguarda a página carregar completamente
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Encontra o botão na página
+    // --- CONFIGURAÇÃO INICIAL ---
     const btnCalcular = document.getElementById('calcular-btn');
+    const selectGenero = document.getElementById('genero');
 
     // Adiciona um "ouvinte" para o clique no botão
-    btnCalcular.addEventListener('click', () => {
-        // Quando o botão for clicado, executa a função 'calcularTudo'
-        calcularTudo();
-    });
+    btnCalcular.addEventListener('click', calcularTudo);
+
+    // Adiciona um "ouvinte" para a mudança no Gênero
+    selectGenero.addEventListener('change', atualizarEtiquetasDobras);
+
+    // Chama a função uma vez no início para garantir que as etiquetas estão corretas
+    atualizarEtiquetasDobras();
 });
 
-// Função principal que lê os dados e chama os cálculos
+/**
+ * Função para mudar as etiquetas das dobras conforme o gênero
+ * Feminino: Tríceps, Supraíliaca
+ * Masculino: Peitoral, Abdominal
+ */
+function atualizarEtiquetasDobras() {
+    const genero = document.getElementById('genero').value;
+    const labelDobra1 = document.getElementById('label-dobra1');
+    const labelDobra2 = document.getElementById('label-dobra2');
+
+    if (genero === 'feminino') {
+        labelDobra1.textContent = 'Tríceps (mm):';
+        labelDobra2.textContent = 'Supraíliaca (mm):';
+    } else { // masculino
+        labelDobra1.textContent = 'Peitoral (mm):';
+        labelDobra2.textContent = 'Abdominal (mm):';
+    }
+}
+
+/**
+ * Função principal que lê os dados e chama os cálculos
+ */
 function calcularTudo() {
     
     // --- 1. LEITURA DOS DADOS (PEGAR VALORES DO HTML) ---
@@ -21,11 +46,8 @@ function calcularTudo() {
     const peso = parseFloat(document.getElementById('peso').value);
 
     // Dobras (mm)
-    // Nota: Usando os mesmos campos para ambos os gêneros,
-    // 'dc-triceps' será 'Peitoral' para homens
-    // 'dc-suprailiaca' será 'Abdominal' para homens
-    const dobra1 = parseFloat(document.getElementById('dc-triceps').value); // Tríceps ou Peitoral
-    const dobra2 = parseFloat(document.getElementById('dc-suprailiaca').value); // Supraíliaca ou Abdominal
+    const dobra1 = parseFloat(document.getElementById('dc-dobra1').value); // Tríceps ou Peitoral
+    const dobra2 = parseFloat(document.getElementById('dc-dobra2').value); // Supraíliaca ou Abdominal
     const dobra3 = parseFloat(document.getElementById('dc-coxa').value); // Coxa
 
     // Circunferências (cm)
@@ -76,10 +98,10 @@ function calcularTudo() {
         // TMB Mifflin St-Jeor (Masculino)
         tmbMifflin = (10 * peso) + (6.25 * estaturaCm) - (5 * idade) + 5;
 
-        // TMB Harris-Benedict (Masculino)
+        // TMB Harris-Benedict (Masculino) - Fórmula padrão
         tmbHarris = 66 + (13.8 * peso) + (5 * estaturaCm) - (6.8 * idade);
 
-        // Peso Residual (Masculino)
+        // Peso Residual (Masculino) - Fórmula padrão
         pesoResidual = peso * 0.241; // 24.1% do Peso Corporal
     }
 
@@ -87,7 +109,7 @@ function calcularTudo() {
     const percGordura = (495 / densidade) - 450;
     const pesoGordura = (percGordura / 100) * peso;
 
-    // Peso Ósseo (Rocha/Von Döbeln) - Fórmula da sua planilha
+    // Peso Ósseo (Rocha/Von Döbeln) - Fórmula da sua planilha (independe de gênero)
     const po_parte1 = (estaturaM * estaturaM) * diamBiestiloideM * diamBicondilianoM * 400;
     const po_parte2 = Math.pow(po_parte1, 0.712);
     const pesoOsseo = 3.02 * po_parte2;
@@ -121,7 +143,9 @@ function calcularTudo() {
     document.getElementById('resultado-forca-lombar').textContent = forcaRelLombar.toFixed(2);
 }
 
-// Função auxiliar para classificar o IMC
+/**
+ * Função auxiliar para classificar o IMC
+ */
 function classificarIMC(imc) {
     if (imc < 18.5) return 'Abaixo do Peso';
     if (imc < 24.9) return 'Peso Normal';
