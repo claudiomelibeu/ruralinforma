@@ -1,0 +1,208 @@
+/* Configurações Globais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container Principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    overflow: hidden; /* Para conter as colunas */
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #005a9c; /* Um tom de azul */
+}
+header h1 {
+    margin: 0;
+}
+header h2 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.2em;
+}
+
+/* Coluna do Formulário (Esquerda) */
+.coluna-form {
+    width: 50%;
+    padding: 30px;
+    border-right: 1px solid #e0e0e0;
+}
+
+/* Coluna dos Resultados (Direita) */
+.coluna-resultados {
+    width: 50%;
+    padding: 30px;
+}
+.coluna-resultados h3 {
+    color: #005a9c;
+    border-bottom: 2px solid #005a9c;
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+.coluna-resultados h4 {
+    color: #333;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+/* Estilização dos Formulários */
+fieldset {
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+legend {
+    font-weight: bold;
+    color: #555;
+    padding: 0 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.form-group label {
+    flex: 1; /* Ocupa 1 parte */
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    flex: 1; /* Ocupa 1 parte */
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Garante que o padding não afete a largura total */
+}
+
+/* Botão de Calcular */
+#calcular-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff; /* Azul primário */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#calcular-btn:hover {
+    background-color: #0056b3; /* Azul mais escuro */
+}
+
+/* Estilização dos Itens de Resultado */
+.resultado-item {
+    background-color: #f9f9f9;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    display: flex;
+    justify-content: space-between; /* Alinha o título e o valor */
+    align-items: center;
+}
+
+.resultado-item strong {
+    color: #444;
+}
+
+/* Onde o número do resultado aparece */
+.resultado-item span {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #005a9c;
+}
+
+/* A classificação (ex: Peso Normal) */
+.resultado-item em {
+    font-style: normal;
+    font-size: 0.9em;
+    color: #555;
+    margin-left: 5px;
+}
+
+/* ======================================= */
+/* ESTILOS DO GRÁFICO DE GORDURA        */
+/* ======================================= */
+
+.grafico-gordura-container {
+    width: 100%;
+    margin-top: 20px; /* Espaço acima */
+    margin-bottom: 25px; /* Espaço abaixo */
+    box-sizing: border-box;
+}
+
+.grafico-titulo {
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1em;
+    color: #333;
+}
+.grafico-titulo strong {
+    color: #005a9c;
+}
+
+.grafico-track {
+    width: 100%;
+    height: 25px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    position: relative; /* Contexto para o indicador */
+    overflow: hidden; /* Para arredondar a barra interna */
+}
+
+.grafico-bar {
+    height: 100%;
+    width: 0%; /* Inicia em 0, o JS controla */
+    background-color: #007bff; /* Cor padrão */
+    border-radius: 15px 0 0 15px;
+    transition: width 1s ease-out, background-color 1s ease-out; /* Animação */
+}
+
+.grafico-indicator {
+    position: absolute;
+    top: -25px; /* Posição acima da barra */
+    left: 0%; /* O JS controla */
+    transform: translateX(-50%); /* Centraliza o indicador */
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #0056b3;
+    background: #fff;
+    padding: 2px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: left 1s ease-out, color 1s ease-out; /* Animação */
+    white-space: nowrap; /* Impede que o texto quebre (ex: 12.5%) */
+    z-index: 10;
+}
+
+.grafico-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75em;
+    color: #777;
+    padding: 5px 2px 0 2px;
+}

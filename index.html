@@ -1,100 +1,78 @@
-<h4>Composição Corporal</h4>
-                <div class="resultado-item">
-                    <strong>Percentual de Gordura (Siri):</strong>
-                    <span id="resultado-perc-gordura">--</span> %
-                </div>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Cineantropométrica - Rural In Forma</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-                <div class="grafico-gordura-container">
-                    <div class="grafico-titulo">
-                        Classificação %G: <strong id="grafico-classificacao">--</strong>
+    <header>
+        <h1>Avaliação Cineantropométrica</h1>
+        <h2>Projeto In Forma Rural</h2>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="coluna-form">
+                <fieldset>
+                    <legend>Dados do Avaliado</legend>
+                    <div class="form-group">
+                        <label for="data-avaliacao">Data da Avaliação:</label>
+                        <input type="date" id="data-avaliacao">
                     </div>
-                    <div class="grafico-track">
-                        <div class="grafico-bar" id="grafico-bar-gordura"></div>
-                        <div class="grafico-indicator" id="grafico-indicator-gordura">--%</div>
+                    <div class="form-group">
+                        <label for="nome">Avaliado:</label>
+                        <input type="text" id="nome" placeholder="Nome completo">
                     </div>
-                    <div class="grafico-labels">
-                        <span>Essencial</span>
-                        <span>Atleta</span>
-                        <span>Forma</span>
-                        <span>Média</span>
-                        <span>Obeso</span>
+                    <div class="form-group">
+                        <label for="genero">Gênero:</label>
+                        <select id="genero">
+                            <option value="feminino">Feminino</option>
+                            <option value="masculino">Masculino</option>
+                        </select>
                     </div>
-                </div>
-                <div class="resultado-item">
-                    <strong>Peso de Gordura:</strong>
-                    <span id="resultado-peso-gordura">--</span> kg
-                </div>
-                
-                ```
+                    <div class="form-group">
+                        <label for="idade">Idade (anos):</label>
+                        <input type="number" id="idade" placeholder="Ex: 41">
+                    </div>
+                    <div class="form-group">
+                        <label for="estatura">Estatura (cm):</label>
+                        <input type="number" id="estatura" step="0.1" placeholder="Ex: 157.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="peso">Peso (kg):</label>
+                        <input type="number" id="peso" step="0.1" placeholder="Ex: 59.5">
+                    </div>
+                </fieldset>
 
----
+                <fieldset>
+                    <legend>Dobras Cutâneas (mm) - Pollock 3</legend>
+                    <div class="form-group">
+                        <label for="dc-dobra1" id="label-dobra1">Tríceps:</label>
+                        <input type="number" id="dc-dobra1" step="0.1" placeholder="Ex: 25">
+                    </div>
+                    <div class="form-group">
+                        <label for="dc-dobra2" id="label-dobra2">Supraíliaca:</label>
+                        <input type="number" id="dc-dobra2" step="0.1" placeholder="Ex: 12">
+                    </div>
+                    <div class="form-group">
+                        <label for="dc-coxa">Coxa Média:</label>
+                        <input type="number" id="dc-coxa" step="0.1" placeholder="Ex: 24">
+                    </div>
+                </fieldset>
 
-### 2. No `style.css`
-
-Abra seu `style.css` e cole este novo bloco de estilos no **final do arquivo**. Ele vai formatar o gráfico que você acabou de adicionar.
-
-```css
-/* ======================================= */
-/* ESTILOS DO GRÁFICO DE GORDURA        */
-/* ======================================= */
-
-.grafico-gordura-container {
-    width: 100%;
-    margin-top: 20px; /* Espaço acima */
-    margin-bottom: 25px; /* Espaço abaixo */
-    box-sizing: border-box;
-}
-
-.grafico-titulo {
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 1em;
-    color: #333;
-}
-.grafico-titulo strong {
-    color: #005a9c;
-}
-
-.grafico-track {
-    width: 100%;
-    height: 25px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    position: relative; /* Contexto para o indicador */
-    overflow: hidden; /* Para arredondar a barra interna */
-}
-
-.grafico-bar {
-    height: 100%;
-    width: 0%; /* Inicia em 0, o JS controla */
-    background-color: #007bff; /* Cor padrão */
-    border-radius: 15px 0 0 15px;
-    transition: width 1s ease-out, background-color 1s ease-out; /* Animação */
-}
-
-.grafico-indicator {
-    position: absolute;
-    top: -25px; /* Posição acima da barra */
-    left: 0%; /* O JS controla */
-    transform: translateX(-50%); /* Centraliza o indicador */
-    font-size: 0.9em;
-    font-weight: bold;
-    color: #0056b3;
-    background: #fff;
-    padding: 2px 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: left 1s ease-out, color 1s ease-out; /* Animação */
-    white-space: nowrap; /* Impede que o texto quebre (ex: 12.5%) */
-    z-index: 10;
-}
-
-.grafico-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.75em;
-    color: #777;
-    padding: 5px 2px 0 2px;
-}
+                <fieldset>
+                    <legend>Circunferências (cm)</legend>
+                    <div class="form-group">
+                        <label for="circ-abdomen">Circ. Abdômen:</label>
+                        <input type="number" id="circ-abdomen" step="0.1" placeholder="Ex: 78">
+                    </div>
+                    <div class="form-group">
+                        <label for="circ-cintura">Circ. Cintura:</label>
+                        <input type="number" id="circ-cintura" step="0.1" placeholder="Ex: 74.7">
+                    </div>
+                    <div class="form-group">
+                        <label for="circ-quadril">Circ. Quadril:</label>
+                        <input type="number" id="circ-quadril" step="0.
