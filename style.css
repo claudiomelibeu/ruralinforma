@@ -1,143 +1,42 @@
-/* Configurações Globais */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    line-height: 1.6;
-    margin: 0;
-    padding: 20px;
-}
+// ... (dentro da função calcularTudo(), após a exibição do 'resultado-perc-gordura') ...
 
-/* Container Principal */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    display: flex;
-    overflow: hidden; /* Para conter as colunas */
-}
+    document.getElementById('resultado-perc-gordura').textContent = percGordura.toFixed(2);
+    // ... (outros resultados como peso-gordura, etc.)
 
-/* Cabeçalho */
-header {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #005a9c; /* Um tom de azul */
-}
-header h1 {
-    margin: 0;
-}
-header h2 {
-    margin: 0;
-    font-weight: 400;
-    font-size: 1.2em;
-}
+    document.getElementById('resultado-forca-lombar').textContent = forcaRelLombar.toFixed(2);
 
-/* Coluna do Formulário (Esquerda) */
-.coluna-form {
-    width: 50%;
-    padding: 30px;
-    border-right: 1px solid #e0e0e0;
-}
 
-/* Coluna dos Resultados (Direita) */
-.coluna-resultados {
-    width: 50%;
-    padding: 30px;
-}
-.coluna-resultados h3 {
-    color: #005a9c;
-    border-bottom: 2px solid #005a9c;
-    padding-bottom: 5px;
-    margin-top: 0;
-}
-.coluna-resultados h4 {
-    color: #333;
-    margin-top: 25px;
-    margin-bottom: 10px;
-}
+    // ===========================================
+    //   NOVO CÓDIGO PARA ATUALIZAR O GRÁFICO
+    // ===========================================
+    
+    // Pega a classificação (texto e cor) da nova função
+    const classificacaoGordura = classificarGordura(genero, percGordura);
+    
+    // Pega os elementos do gráfico que criamos no HTML
+    const graficoBar = document.getElementById('grafico-bar-gordura');
+    const graficoIndicator = document.getElementById('grafico-indicator-gordura');
+    const graficoTitulo = document.getElementById('grafico-classificacao');
 
-/* Estilização dos Formulários */
-fieldset {
-    border: 1px solid #dcdcdc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    padding: 15px;
-}
+    // Limita o valor da barra a 100% (segurança)
+    const percGorduraSeguro = Math.min(Math.max(percGordura, 0), 100);
 
-legend {
-    font-weight: bold;
-    color: #555;
-    padding: 0 10px;
-}
+    // 1. Atualiza a BARRA
+    graficoBar.style.width = percGorduraSeguro + '%';
+    graficoBar.style.backgroundColor = classificacaoGordura.cor;
 
-.form-group {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-}
+    // 2. Atualiza o INDICADOR (a bolha com o número)
+    graficoIndicator.textContent = percGordura.toFixed(1) + '%';
+    graficoIndicator.style.left = percGorduraSeguro + '%'; // Move para a posição correta
+    graficoIndicator.style.color = classificacaoGordura.cor; // Muda a cor do texto
 
-.form-group label {
-    flex: 1; /* Ocupa 1 parte */
-    font-weight: 600;
-}
+    // 3. Atualiza o TÍTULO da classificação
+    graficoTitulo.textContent = classificacaoGordura.texto;
 
-.form-group input,
-.form-group select {
-    flex: 1; /* Ocupa 1 parte */
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Garante que o padding não afete a largura total */
-}
+    // ===========================================
+    //         FIM DO NOVO CÓDIGO
+    // ===========================================
 
-/* Botão de Calcular */
-#calcular-btn {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #fff;
-    background-color: #007bff; /* Azul primário */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+} // <-- Fim da função calcularTudo()
 
-#calcular-btn:hover {
-    background-color: #0056b3; /* Azul mais escuro */
-}
-
-/* Estilização dos Itens de Resultado */
-.resultado-item {
-    background-color: #f9f9f9;
-    padding: 12px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    border: 1px solid #eee;
-    display: flex;
-    justify-content: space-between; /* Alinha o título e o valor */
-    align-items: center;
-}
-
-.resultado-item strong {
-    color: #444;
-}
-
-/* Onde o número do resultado aparece */
-.resultado-item span {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #005a9c;
-}
-
-/* A classificação (ex: Peso Normal) */
-.resultado-item em {
-    font-style: normal;
-    font-size: 0.9em;
-    color: #555;
-    margin-left: 5px;
-}
+// ... (Resto do arquivo, com as funções classificarIMC e classificarGordura) ...
