@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+i<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -17,14 +17,14 @@
         <div class="container">
             <div class="coluna-form">
                 <fieldset>
-                    <legend>Dados do Avaliado</legend>
+                    <legend>Dados Pessoais</legend>
                     <div class="form-group">
-                        <label for="data-avaliacao">Data da Avaliação:</label>
+                        <label for="data-avaliacao">Data:</label>
                         <input type="date" id="data-avaliacao">
                     </div>
                     <div class="form-group">
-                        <label for="nome">Avaliado:</label>
-                        <input type="text" id="nome" placeholder="Nome completo">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome">
                     </div>
                     <div class="form-group">
                         <label for="genero">Gênero:</label>
@@ -48,46 +48,46 @@
                 </fieldset>
 
                 <fieldset>
-                    <legend>Dobras Cutâneas (mm) - Pollock 3</legend>
+                    <legend>Dobras Cutâneas (mm)</legend>
                     <div class="form-group">
                         <label for="dc-dobra1" id="label-dobra1">Tríceps:</label>
-                        <input type="number" id="dc-dobra1" step="0.1" placeholder="Ex: 25">
+                        <input type="number" id="dc-dobra1" step="0.1">
                     </div>
                     <div class="form-group">
                         <label for="dc-dobra2" id="label-dobra2">Supraíliaca:</label>
-                        <input type="number" id="dc-dobra2" step="0.1" placeholder="Ex: 12">
+                        <input type="number" id="dc-dobra2" step="0.1">
                     </div>
                     <div class="form-group">
                         <label for="dc-coxa">Coxa Média:</label>
-                        <input type="number" id="dc-coxa" step="0.1" placeholder="Ex: 24">
+                        <input type="number" id="dc-coxa" step="0.1">
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <legend>Circunferências (cm)</legend>
                     <div class="form-group">
-                        <label for="circ-abdomen">Circ. Abdômen:</label>
-                        <input type="number" id="circ-abdomen" step="0.1" placeholder="Ex: 78">
+                        <label for="circ-abdomen">Abdômen:</label>
+                        <input type="number" id="circ-abdomen" step="0.1">
                     </div>
                     <div class="form-group">
-                        <label for="circ-cintura">Circ. Cintura:</label>
-                        <input type="number" id="circ-cintura" step="0.1" placeholder="Ex: 74.7">
+                        <label for="circ-cintura">Cintura:</label>
+                        <input type="number" id="circ-cintura" step="0.1">
                     </div>
                     <div class="form-group">
-                        <label for="circ-quadril">Circ. Quadril:</label>
-                        <input type="number" id="circ-quadril" step="0.1" placeholder="Ex: 96">
+                        <label for="circ-quadril">Quadril:</label>
+                        <input type="number" id="circ-quadril" step="0.1">
                     </div>
                 </fieldset>
                 
                 <fieldset>
                     <legend>Diâmetros Ósseos (cm)</legend>
                     <div class="form-group">
-                        <label for="diam-biestiloide">Diâ. Biestilóide (Punho):</label>
-                        <input type="number" id="diam-biestiloide" step="0.1" placeholder="Ex: 5.8">
+                        <label for="diam-biestiloide">Punho (Biestilóide):</label>
+                        <input type="number" id="diam-biestiloide" step="0.1">
                     </div>
                     <div class="form-group">
-                        <label for="diam-bicondiliano">Diâ. Bicondiliano (Fêmur):</label>
-                        <input type="number" id="diam-bicondiliano" step="0.1" placeholder="Ex: 10.4">
+                        <label for="diam-bicondiliano">Fêmur (Bicondiliano):</label>
+                        <input type="number" id="diam-bicondiliano" step="0.1">
                     </div>
                 </fieldset>
 
@@ -95,95 +95,87 @@
                     <legend>Testes Funcionais</legend>
                     <div class="form-group">
                         <label for="banco-wells">Banco de Wells (cm):</label>
-                        <input type="number" id="banco-wells" step="0.1" placeholder="Ex: 35">
+                        <input type="number" id="banco-wells" step="0.1">
                     </div>
                     <div class="form-group">
-                        <label for="din-mao">Dinamômetro de Mão (kg):</label>
-                        <input type="number" id="din-mao" step="0.1" placeholder="Ex: 23.1">
+                        <label for="din-mao">Dinamômetro Mão (kg):</label>
+                        <input type="number" id="din-mao" step="0.1">
                     </div>
                     <div class="form-group">
                         <label for="din-lombar">Dinamômetro Lombar (kg):</label>
-                        <input type="number" id="din-lombar" step="0.1" placeholder="Ex: 64">
+                        <input type="number" id="din-lombar" step="0.1">
                     </div>
                 </fieldset>
 
-                <button type="button" id="calcular-btn">Calcular Avaliação</button>
+                <button type="button" id="calcular-btn">CALCULAR AVALIAÇÃO</button>
             </div>
 
             <div class="coluna-resultados">
-                <h3>Resultados da Avaliação</h3>
+                <h3>Resultados</h3>
                 
                 <div class="resultado-item">
                     <strong>IMC:</strong>
-                    <span id="resultado-imc">--</span>
-                    <em>(<span id="resultado-imc-class">--</span>)</em>
+                    <span><span id="res-imc">--</span> <small id="class-imc"></small></span>
                 </div>
                 <div class="resultado-item">
-                    <strong>RCQ (Relação Cintura-Quadril):</strong>
-                    <span id="resultado-rcq">--</span>
+                    <strong>RCQ (Cintura/Quadril):</strong>
+                    <span id="res-rcq">--</span>
                 </div>
                 
                 <h4>Composição Corporal</h4>
-                <div class="resultado-item">
-                    <strong>Percentual de Gordura (Siri):</strong>
-                    <span id="resultado-perc-gordura">--</span> %
-                </div>
-
-                <div class="grafico-gordura-container">
-                    <div class="grafico-titulo">
-                        Classificação %G: <strong id="grafico-classificacao">--</strong>
+                
+                <div class="grafico-box">
+                    <div class="grafico-header">
+                        <span>% de Gordura:</span>
+                        <strong id="res-gordura-val">--%</strong>
                     </div>
-                    <div class="grafico-track">
-                        <div class="grafico-bar" id="grafico-bar-gordura"></div>
-                        <div class="grafico-indicator" id="grafico-indicator-gordura">--%</div>
+                    <div class="grafico-barra-fundo">
+                        <div class="grafico-barra-progresso" id="grafico-barra"></div>
                     </div>
-                    <div class="grafico-labels">
-                        <span>Essencial</span>
-                        <span>Atleta</span>
-                        <span>Forma</span>
-                        <span>Média</span>
-                        <span>Obeso</span>
+                    <div class="grafico-legenda">
+                        <small>Classificação: <strong id="grafico-texto">--</strong></small>
                     </div>
                 </div>
+
                 <div class="resultado-item">
-                    <strong>Peso de Gordura:</strong>
-                    <span id="resultado-peso-gordura">--</span> kg
+                    <strong>Massa Gorda:</strong>
+                    <span id="res-peso-gordura">-- kg</span>
                 </div>
                 <div class="resultado-item">
-                    <strong>Peso Ósseo:</strong>
-                    <span id="resultado-peso-osseo">--</span> kg
+                    <strong>Massa Muscular:</strong>
+                    <span id="res-peso-muscular">-- kg</span>
                 </div>
                 <div class="resultado-item">
-                    <strong>Peso Residual:</strong>
-                    <span id="resultado-peso-residual">--</span> kg
+                    <strong>Massa Óssea:</strong>
+                    <span id="res-peso-osseo">-- kg</span>
                 </div>
                 <div class="resultado-item">
-                    <strong>Peso Magro:</strong>
-                    <span id="resultado-peso-magro">--</span> kg
+                    <strong>Massa Residual:</strong>
+                    <span id="res-peso-residual">-- kg</span>
                 </div>
                 <div class="resultado-item">
-                    <strong>Peso Muscular:</strong>
-                    <span id="resultado-peso-muscular">--</span> kg
+                    <strong>Massa Magra Total:</strong>
+                    <span id="res-peso-magro">-- kg</span>
                 </div>
 
-                <h4>Metabolismo Basal</h4>
+                <h4>Metabolismo</h4>
                 <div class="resultado-item">
-                    <strong>TMB (Mifflin St-Jeor):</strong>
-                    <span id="resultado-tmb-mifflin">--</span> kcal
+                    <strong>TMB (Mifflin):</strong>
+                    <span id="res-tmb-mifflin">-- kcal</span>
                 </div>
                 <div class="resultado-item">
-                    <strong>TMB (Harris Benedict):</strong>
-                    <span id="resultado-tmb-harris">--</span> kcal
+                    <strong>TMB (Harris):</strong>
+                    <span id="res-tmb-harris">-- kcal</span>
                 </div>
 
-                <h4>Testes Funcionais</h4>
+                <h4>Funcional</h4>
                 <div class="resultado-item">
-                    <strong>Força Relativa (Mão):</strong>
-                    <span id="resultado-forca-mao">--</span>
+                    <strong>Força Rel. Mão:</strong>
+                    <span id="res-forca-mao">--</span>
                 </div>
                 <div class="resultado-item">
-                    <strong>Força Relativa (Lombar):</strong>
-                    <span id="resultado-forca-lombar">--</span>
+                    <strong>Força Rel. Lombar:</strong>
+                    <span id="res-forca-lombar">--</span>
                 </div>
             </div>
         </div>
