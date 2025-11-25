@@ -1,7 +1,12 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Ouve o clique no botão
+    // Ouve o clique no botão Calcular
     document.getElementById('calcular-btn').addEventListener('click', calcular);
+    
+    // Ouve o clique no botão Imprimir (NOVO)
+    document.getElementById('imprimir-btn').addEventListener('click', () => {
+        window.print();
+    });
+
     // Ouve a mudança de gênero para trocar os nomes das dobras
     document.getElementById('genero').addEventListener('change', atualizarLabels);
     
@@ -21,7 +26,9 @@ function atualizarLabels() {
 }
 
 function calcular() {
-    // 1. Coleta de Dados (com proteção contra campos vazios usando || 0)
+    // 1. Coleta de Dados
+    const nome = document.getElementById('nome').value || 'Não informado';
+    const dataAval = document.getElementById('data-avaliacao').value;
     const genero = document.getElementById('genero').value;
     const idade = parseFloat(document.getElementById('idade').value) || 0;
     const estaturaCm = parseFloat(document.getElementById('estatura').value) || 0;
@@ -66,17 +73,15 @@ function calcular() {
     // Siri
     let percGordura = (495 / densidade) - 450;
     
-    // Proteção para números malucos se dobras forem 0
+    // Proteção para números malucos
     if (somaDobras === 0 || densidade <= 0) percGordura = 0;
 
     // Massas
     let pesoGordura = (percGordura / 100) * peso;
     
-    // Peso Ósseo (Rocha) - Precisa converter diâmetros para metros também
+    // Peso Ósseo (Rocha)
     let pesoOsseo = 0;
     if (estM > 0 && punho > 0 && femur > 0) {
-        // Fórmula: 3.02 * ((Estatura² * Punho * Femur * 400)^0.712)
-        // Nota: Diâmetros e Estatura em Metros
         let base = (estM * estM) * (punho/100) * (femur/100) * 400;
         pesoOsseo = 3.02 * Math.pow(base, 0.712);
     }
@@ -109,13 +114,28 @@ function calcular() {
     let frLombar = peso > 0 ? dinLombar / peso : 0;
 
 
-    // --- EXIBIÇÃO DOS RESULTADOS NO HTML ---
+    // --- EXIBIÇÃO ---
     
+    // Preenche cabeçalho do relatório (Para Impressão)
+    setText('rel-nome', nome);
+    // Formata a data para dia/mes/ano se houver data
+    if(dataAval) {
+        const d = new Date(dataAval);
+        setText('rel-data', d.toLocaleDateString('pt-BR', {timeZone: 'UTC'}));
+    } else {
+        setText('rel-data', '--/--/----');
+    }
+    setText('rel-idade', idade + ' anos');
+    
+    // Mostra o cabeçalho no HTML (mas o CSS vai esconder até imprimir)
+    document.getElementById('cabecalho-relatorio').style.display = 'block';
+
+    // Resultados
     setText('res-imc', imc.toFixed(2));
     setText('class-imc', classificarIMC(imc));
     setText('res-rcq', rcq.toFixed(3));
 
-    // Gráfico de Gordura
+    // Gráfico
     atualizarGraficoGordura(percGordura, genero);
     
     setText('res-peso-gordura', pesoGordura.toFixed(2) + ' kg');
@@ -129,9 +149,11 @@ function calcular() {
 
     setText('res-forca-mao', frMao.toFixed(2));
     setText('res-forca-lombar', frLombar.toFixed(2));
+
+    // MOSTRAR O BOTÃO DE IMPRIMIR
+    document.getElementById('imprimir-btn').style.display = 'block';
 }
 
-// Função auxiliar para escrever na tela
 function setText(id, valor) {
     document.getElementById(id).innerText = valor;
 }
@@ -144,7 +166,6 @@ function classificarIMC(imc) {
 }
 
 function atualizarGraficoGordura(pg, genero) {
-    // Limites visuais (0 a 100)
     let valorVisual = pg;
     if (valorVisual < 0) valorVisual = 0;
     if (valorVisual > 100) valorVisual = 100;
@@ -156,16 +177,15 @@ function atualizarGraficoGordura(pg, genero) {
     barra.style.width = valorVisual + '%';
     textoVal.innerText = pg.toFixed(1) + '%';
 
-    // Classificação e Cores
     let classe = '';
     let cor = '';
 
     if (genero === 'feminino') {
-        if (pg < 14) { classe = 'Essencial'; cor = '#ffc107'; } // Amarelo
-        else if (pg < 21) { classe = 'Atleta'; cor = '#28a745'; } // Verde
-        else if (pg < 25) { classe = 'Fitness'; cor = '#20c997'; } // Verde-água
-        else if (pg < 32) { classe = 'Aceitável'; cor = '#17a2b8'; } // Azul
-        else { classe = 'Obeso'; cor = '#dc3545'; } // Vermelho
+        if (pg < 14) { classe = 'Essencial'; cor = '#ffc107'; } 
+        else if (pg < 21) { classe = 'Atleta'; cor = '#28a745'; } 
+        else if (pg < 25) { classe = 'Fitness'; cor = '#20c997'; } 
+        else if (pg < 32) { classe = 'Aceitável'; cor = '#17a2b8'; } 
+        else { classe = 'Obeso'; cor = '#dc3545'; } 
     } else {
         if (pg < 6) { classe = 'Essencial'; cor = '#ffc107'; }
         else if (pg < 14) { classe = 'Atleta'; cor = '#28a745'; }

@@ -1,4 +1,4 @@
-i<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -111,8 +111,13 @@ i<!DOCTYPE html>
             </div>
 
             <div class="coluna-resultados">
-                <h3>Resultados</h3>
+                <h3>Relatório de Resultados</h3>
                 
+                <div id="cabecalho-relatorio" style="display: none; margin-bottom: 20px; border-bottom: 2px solid #ddd; padding-bottom: 10px;">
+                    <p><strong>Aluno(a):</strong> <span id="rel-nome">--</span></p>
+                    <p><strong>Data:</strong> <span id="rel-data">--</span> | <strong>Idade:</strong> <span id="rel-idade">--</span></p>
+                </div>
+
                 <div class="resultado-item">
                     <strong>IMC:</strong>
                     <span><span id="res-imc">--</span> <small id="class-imc"></small></span>
@@ -176,6 +181,15 @@ i<!DOCTYPE html>
                 <div class="resultado-item">
                     <strong>Força Rel. Lombar:</strong>
                     <span id="res-forca-lombar">--</span>
+                </div>
+
+                <button type="button" id="imprimir-btn" style="display: none;">🖨️ IMPRIMIR RELATÓRIO</button>
+
+                <div class="assinatura-box" style="display: none;">
+                    <br><br><br>
+                    <div style="border-top: 1px solid #000; width: 60%; margin: 0 auto; text-align: center; padding-top: 5px;">
+                        Avaliador Responsável
+                    </div>
                 </div>
             </div>
         </div>
